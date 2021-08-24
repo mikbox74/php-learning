@@ -3,4 +3,4 @@
 # Except this
 !.gitignore
 !/localhost
-/localhost/*.*
+/localhost/*
