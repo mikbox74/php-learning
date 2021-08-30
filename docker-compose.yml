@@ -33,6 +33,9 @@ services:
         container_name: dev-php
         build:
             context: ./php/.
+            args:
+            - USER_ID
+            - GROUP_ID
         image: dev/php:8.0-fpm-alpine
         hostname: php
         restart: unless-stopped

@@ -1,5 +1,11 @@
 FROM php:8.0.0-fpm-alpine
 
+ARG USER_ID
+ARG GROUP_ID
+
+RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
+RUN apk --no-cache add shadow
+
 RUN mkdir -p /usr/local/php-logs
 
 ######## [PHP Modules] Default ########
@@ -127,6 +133,8 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 RUN rm -rf /tmp/* /var/cache/apk/* \
   && echo "=============================================" \
   && php -m
+
+RUN usermod -u ${USER_ID} www-data && groupmod -g ${GROUP_ID} www-data
 
 # Starting
 CMD chown -R www-data:www-data /var/app && \
