@@ -129,7 +129,8 @@ RUN rm -rf /tmp/* /var/cache/apk/* \
   && php -m
 
 # Starting
-CMD touch /usr/local/php-logs/php-fpm.log && \
+CMD chown -R www-data:www-data /var/app && \
+  touch /usr/local/php-logs/php-fpm.log && \
   chmod 666 /usr/local/php-logs/php-fpm.log && \
   php-fpm -F
 
